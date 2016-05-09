@@ -3,6 +3,9 @@ bar = {x=0,y=620,w=370,h=50}
 keys = {"left","up","down","right"}
 score = 0
 s = 250
+r=255
+g=0
+b=0
 
 function board()
 	for i=0, 3 do
@@ -19,25 +22,43 @@ function arrow.add(x,y,num,speed)
 	end
 end
 
+function gradient()
+	if r >= 255 and g <= 0 then
+		b = b + 5
+	end
+	if b >= 255 and g <= 0 then
+		r = r - 5
+	end
+	if b >= 255 and r <= 0 then
+		g = g + 5
+	end
+	if g >= 255 and r <= 0 then
+		b = b - 5
+	end
+	if g >= 255 and b <= 0 then
+		r = r + 5
+	end
+	if r >= 255 and b <= 0 then
+		g = g - 5
+	end 
+end
+
 function arrow:draw()
 	for i,v in ipairs(arrow) do
+		love.graphics.setColor(r,g,b)
 		if v.lane == 1 then
-			love.graphics.setColor(192,5,5)
 			love.graphics.polygon("fill",v.x,v.y+25,v.x+50,v.y,v.x+50,v.y+50)
 			love.graphics.setColor(255,255,255)
 			love.graphics.print(v.status, v.x, v.y)
 		elseif v.lane == 2 then
-			love.graphics.setColor(89,97,194)
 			love.graphics.polygon("fill",v.x+100,v.y+50,v.x+125,v.y,v.x+150,v.y+50)
 			love.graphics.setColor(255,255,255)
 			love.graphics.print(v.status, v.x+100, v.y)
 		elseif v.lane == 3 then
-			love.graphics.setColor(124,17,186)
 			love.graphics.polygon("fill",v.x+200,v.y,v.x+250,v.y,v.x+225,v.y+50)
 			love.graphics.setColor(255,255,255)
 			love.graphics.print(v.status, v.x+200, v.y)
 		elseif v.lane == 4 then
-			love.graphics.setColor(10,173,163)
 			love.graphics.polygon("fill",v.x+300,v.y,v.x+350,v.y+25,v.x+300,v.y+50)
 			love.graphics.setColor(255,255,255)
 			love.graphics.print(v.status, v.x+300, v.y)

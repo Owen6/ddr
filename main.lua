@@ -8,8 +8,9 @@ end
 function love.update(dt)
 	arrow:move(dt)
 	arrow:collision()
-	print(s)
-	s = s + .10
+	print(score)
+	s = s + .005
+	gradient()
 end
 
 function love.draw()
